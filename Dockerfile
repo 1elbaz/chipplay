@@ -27,8 +27,7 @@ RUN apt-get -y update && apt-get -y install \
 
 ##clone into AirPlay code git repo, run configuration, and compile
 RUN git clone https://github.com/mikebrady/shairport-sync
-RUN cd shairport-sync && autoreconf -i -f && ./configure --with-alsa --with-avahi --with-ssl=openssl --with-metadata --with-soxr --with-systemd
-RUN make
+RUN cd shairport-sync && autoreconf -i -f && ./configure --with-alsa --with-avahi --with-ssl=openssl --with-metadata --with-soxr --with-systemd && make
 
 ##set permissions and install
 RUN getent group shairport-sync &>/dev/null || sudo groupadd -r shairport-sync >/dev/null
