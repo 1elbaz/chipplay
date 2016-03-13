@@ -4,22 +4,25 @@ MAINTAINER Ben El-Baz
 USER root
 
 ##install all required libraries and dependancies, install docker
-RUN apt-get -y update
-RUN apt-get -y install curl
+RUN apt-get -y update && apt-get -y install  \ 
+    curl \
+&& rm -rf /var/lib/apt/lists/*
+
 RUN cd /etc/apt && { curl -O https://raw.githubusercontent.com/1elbaz/chipplay/master/sources.list > sources.list ; cd -- ; }
-RUN apt-get -y update
-RUN apt-get -y install docker.io
-RUN apt-get –y install build-essential
-RUN apt-get –y install git
-RUN apt-get –y install autoconf
-RUN apt-get –y install libtool
-RUN apt-get –y install libdaemon-dev
-RUN apt-get –y install libasound2-dev
-RUN apt-get –y install libconfig-dev
-RUN apt-get –y install libavahi-client-dev
-RUN apt-get –y install libpopt-dev
-RUN apt-get –y install libssl-dev
-RUN apt-get –y install libsoxr-dev
+RUN apt-get -y update && apt-get -y install \
+    docker.io \
+    build-essential \
+    git \
+    autoconf \
+    libtool \
+    libdaemon-dev \
+    libasound2-dev \
+    libconfig-dev \
+    libavahi-client-dev \
+    libpopt-dev \
+    libssl-dev \
+    libsoxr-dev \
+&& rm =rf /var/lib/apt/lists/*
 
 ##clone into AirPlay code git repo, run configuration, and compile
 RUN git clone https://github.com/mikebrady/shairport-sync
