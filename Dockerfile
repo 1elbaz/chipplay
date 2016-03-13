@@ -22,7 +22,7 @@ RUN apt-get -y update && apt-get -y install \
     libpopt-dev \
     libssl-dev \
     libsoxr-dev \
-&& rm =rf /var/lib/apt/lists/*
+&& rm -rf /var/lib/apt/lists/*
 
 ##clone into AirPlay code git repo, run configuration, and compile
 RUN git clone https://github.com/mikebrady/shairport-sync
