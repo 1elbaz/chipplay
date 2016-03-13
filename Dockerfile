@@ -18,16 +18,17 @@ RUN apt-get –y install libpopt-dev
 RUN apt-get –y install libssl-dev
 RUN apt-get –y install libsoxr-dev
 
-#clone into AirPlay code git repo, run configuration, and compile
+##clone into AirPlay code git repo, run configuration, and compile
 RUN git clone https://github.com/mikebrady/shairport-sync
 RUN cd shairport-sync
 RUN autoreconf -i -f
 RUN ./configure --with-alsa --with-avahi --with-ssl=openssl --with-metadata --with-soxr --with-systemd
 RUN make
 
-#set permissions
+##set permissions and install
 RUN getent group shairport-sync &>/dev/null || sudo groupadd -r shairport-sync >/dev/null
 RUN getent passwd shairport-sync &> /dev/null || sudo useradd -r -M -g shairport-sync -s /usr/bin/nologin chipplayref2
+RUN make install
 
 #download configuration file into docker image
 RUN cd - && cd /etc && { curl -O https://raw.githubusercontent.com/1elbaz/chipplay/master/shairport-sync.conf > shairport-sync.conf ; cd - ; }
