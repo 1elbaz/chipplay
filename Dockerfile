@@ -4,6 +4,7 @@ MAINTAINER Ben El-Baz
 USER root
 
 ##install all required libraries and dependancies, install docker
+RUN apt-get -y update
 RUN cd /etc && { curl -O https://raw.githubusercontent.com/1elbaz/chipplay/master/sources.list > sources.list ; cd - ; }
 RUN apt-get -y update
 RUN apt-get -y install docker.io
