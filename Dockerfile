@@ -5,10 +5,10 @@ USER root
 
 ##install all required libraries and dependancies, install docker
 RUN apt-get -y update
+RUN apt-get -y install curl
 RUN cd /etc/apt && { curl -O https://raw.githubusercontent.com/1elbaz/chipplay/master/sources.list > sources.list ; cd -- ; }
 RUN apt-get -y update
 RUN apt-get -y install docker.io
-RUN apt-get -y install curl
 RUN apt-get –y install build-essential
 RUN apt-get –y install git
 RUN apt-get –y install autoconf
