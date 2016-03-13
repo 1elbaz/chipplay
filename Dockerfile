@@ -12,6 +12,7 @@ RUN cd /etc/apt && { curl -O https://raw.githubusercontent.com/1elbaz/chipplay/m
 RUN apt-get -y update && apt-get -y install \
     docker.io \
     build-essential \
+    dh-autoreconf \
     git \
     autoconf \
     libtool \
@@ -26,9 +27,7 @@ RUN apt-get -y update && apt-get -y install \
 
 ##clone into AirPlay code git repo, run configuration, and compile
 RUN git clone https://github.com/mikebrady/shairport-sync
-RUN cd shairport-sync
-RUN autoreconf -i -f
-RUN ./configure --with-alsa --with-avahi --with-ssl=openssl --with-metadata --with-soxr --with-systemd
+RUN cd shairport-sync && autoreconf -i -f && ./configure --with-alsa --with-avahi --with-ssl=openssl --with-metadata --with-soxr --with-systemd
 RUN make
 
 ##set permissions and install
