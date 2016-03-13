@@ -15,6 +15,10 @@ RUN apt-get -y update && apt-get -y install \
     dh-autoreconf \
     git \
     autoconf \
+    avahi-daemon \
+    avahi-discover \
+    avahi-utils \
+    libnss-mdns \
     libtool \
     libdaemon-dev \
     libasound2-dev \
@@ -37,3 +41,6 @@ RUN make install
 ##download configuration files into docker image, including the config file that starts shairport-sync at boot
 RUN cd - && cd /etc && { curl -O https://raw.githubusercontent.com/1elbaz/chipplay/master/shairport-sync.conf > shairport-sync.conf ; }
 RUN curl -O https://raw.githubusercontent.com/1elbaz/chipplay/master/rc.local > rc.local && cd -
+
+RUN systemctl enable dbus.service
+RUN systemctl enable avahi-daemon.service
